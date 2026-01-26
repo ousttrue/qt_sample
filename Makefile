@@ -1,0 +1,2 @@
+all:
+	pixi run build

@@ -1,0 +1,40 @@
+[workspace]
+authors = ["ousttrue <ousttrue@gmail.com>"]
+channels = ["conda-forge"]
+name = "qt_sample"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[dependencies]
+qt6-main = ">=6.10.1,<7"
+cxx-compiler = ">=1.9.0, <2"
+ninja = ">=1.12.1,<2"
+
+[tasks.configure]
+# Commands as lists so you can also add documentation in between.
+cmd = [
+  "cmake",
+  # Use the cross-platform Ninja generator
+  "-G",
+  "Ninja",
+  # The source is in the root directory
+  "-S",
+  "src",
+  # We wanna build in the .build directory
+  "-B",
+  "build",
+]
+inputs = ["src/CMakeLists.txt"]
+outputs = ["build/CMakeFiles/"]
+
+# Build the executable but make sure CMake is configured first.
+[tasks.build]
+cmd = ["cmake", "--build", "build"]
+depends-on = ["configure"]
+inputs = ["src/*"]
+outputs = ["build/helloworld.exe"]
+
+[tasks.start]
+cmd = ["build/helloworld"]
+depends-on = ["build"]
+
