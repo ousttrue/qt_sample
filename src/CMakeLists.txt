@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20...3.27)
+cmake_minimum_required(VERSION 3.18)
 
 project(
   helloworld
@@ -15,7 +15,15 @@ if(NOT PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     CONTENT "*")
 endif()
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml QuickControls2)
+set(CMAKE_AUTOMOC ON)
+
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick QuickControls2 
+  #
+  Quick3D
+)
 qt_standard_project_setup()
 
-subdirs(hello)
+subdirs(
+  # hello 
+  hellocube
+)
