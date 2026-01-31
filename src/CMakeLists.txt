@@ -17,13 +17,8 @@ endif()
 
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick QuickControls2 
-  #
-  Quick3D
-)
-qt_standard_project_setup()
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick QuickControls2 Quick3D)
+qt_standard_project_setup(REQUIRES 6.8)
 
-add_subdirectory(
-  # hello 
-  hellocube
-)
+add_subdirectory(hello)
+add_subdirectory(hellocube)
