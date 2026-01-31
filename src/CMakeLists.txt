@@ -23,7 +23,7 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick QuickControls2
 )
 qt_standard_project_setup()
 
-subdirs(
+add_subdirectory(
   # hello 
   hellocube
 )
