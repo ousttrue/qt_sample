@@ -11,9 +11,7 @@ qt6-quick3d = ">=6.10.1,<7"
 qt6-3d = ">=6.10.1,<7"
 cxx-compiler = ">=1.9.0, <2"
 ninja = ">=1.12.1,<2"
-# CMake Error at .pixi/envs/default/Library/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:5499:EVAL:1 (cmake_language):
-#   cmake_language DEFER CALL may not be scheduled in directory:
-cmake = "<3.19.0"
+cmake = ">=3.22.0"
 
 [tasks.configure]
 # Commands as lists so you can also add documentation in between.
@@ -28,8 +26,6 @@ cmd = [
   # We wanna build in the .build directory
   "-B",
   "build",
-  # "--debug-output",
-  "-DQT_FORCE_MIN_CMAKE_VERSION_FOR_USING_QT=3.18",
 ]
 inputs = ["src/**/CMakeLists.txt"]
 outputs = ["build/CMakeFiles/"]
@@ -40,7 +36,12 @@ depends-on = ["configure"]
 inputs = ["src/*"]
 outputs = ["build/hellocube.exe"]
 
-[tasks.hello]
+[tasks.run_hello]
+args = ["qml"]
+cmd = ["build/helloworld.exe", "{{ qml }}"]
+depends-on = ["build"]
+
+[tasks.run_cube]
 cmd = ["build/hellocube.exe"]
 depends-on = ["build"]
 
